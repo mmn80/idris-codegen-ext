@@ -1,0 +1,17 @@
+resolver: lts-7.10
+
+packages:
+  - location: .
+  - location : ../Idris-dev
+    extra-dep: true
+
+flags:
+  idris:
+    FFI: true
+    GMP: true
+  idris-codegen-ext:
+    GMP: true
+
+extra-deps:
+  - libffi-0.1
+  - safe-0.3.9

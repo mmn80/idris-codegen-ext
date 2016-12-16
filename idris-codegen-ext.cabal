@@ -1,0 +1,88 @@
+name:           idris-codegen-ext
+version:        0.1
+license:        BSD3
+synopsis:       An idris executable extended with a new codegen
+cabal-version:  >= 1.8.1
+build-type:     Custom
+
+data-files:     rts/arduino/idris_main.c
+                rts/idris_bitstring.c
+                rts/idris_bitstring.h
+                rts/idris_gc.c
+                rts/idris_gc.h
+                rts/idris_gmp.c
+                rts/idris_gmp.h
+                rts/idris_heap.c
+                rts/idris_heap.h
+                rts/idris_main.c
+                rts/idris_net.c
+                rts/idris_net.h
+                rts/idris_opts.c
+                rts/idris_opts.h
+                rts/idris_rts.c
+                rts/idris_rts.h
+                rts/idris_stats.c
+                rts/idris_stats.h
+                rts/idris_stdfgn.c
+                rts/idris_stdfgn.h
+                rts/mini-gmp.c
+                rts/mini-gmp.h
+
+extra-doc-files:
+                README.md
+
+source-repository head
+  type:     git
+  location: git://github.com/mmn80/idris-codegen-ext.git
+
+flag GMP
+  description:  Use GMP for Integers
+  default:      False
+  manual:       True
+
+library
+  hs-source-dirs: src
+  exposed-modules:
+                  IRTS.MyCodegenC
+
+  other-modules:
+                -- Auto Generated
+                  Paths_idris_codegen_ext
+
+  build-depends:  base >=4 && <5
+                , idris
+                , directory >= 1.2.2.0 && < 1.2.3.0 || > 1.2.3.0
+                , filepath < 1.5
+                , process < 1.5
+
+  ghc-prof-options: -auto-all -caf-all
+
+  if os(linux)
+     build-depends: unix < 2.8
+  if os(freebsd)
+     build-depends: unix < 2.8
+  if os(dragonfly)
+     build-depends: unix < 2.8
+  if os(darwin)
+     build-depends: unix < 2.8
+  if os(windows)
+     build-depends: Win32 < 2.4
+  if flag(GMP)
+     build-depends: libffi < 0.2
+     extra-libraries: gmp
+     cpp-options:   -DIDRIS_GMP
+
+executable idris-ext
+  main-is:        Main.hs
+  hs-source-dirs: main
+
+  build-depends:  idris
+                , idris-codegen-ext
+                , base
+                , filepath
+                , directory
+                , haskeline >= 0.7
+                , transformers
+
+  ghc-prof-options: -auto-all -caf-all
+  ghc-options:      -threaded -rtsopts -funbox-strict-fields
