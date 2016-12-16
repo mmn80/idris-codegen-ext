@@ -14,4 +14,10 @@ associated with loading IBC files of the prelude or other dependencies
 being eliminated.
 
 It is suited for interactive code generation, eg. compiling one module at a time
-from the REPL/IDE mode server process. 
+from the REPL/IDE mode server process.
+
+## How to use
+
+`idris-ext --codegen X ./SomeModule.idr -o SomeExecutable`
+
+From the REPL: `:c X SomeExecutable`
