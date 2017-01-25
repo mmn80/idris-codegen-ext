@@ -1,5 +1,7 @@
 # idris-codegen-ext
 
+NOTE: depends on a PR on `idris` which has not been merged; postponed...
+
 A version of the `idris` executable extended with a new (embedded) code generator.
 
 The codegen is just a clone of the built in C codegen, with the only difference
