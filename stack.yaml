@@ -1,4 +1,4 @@
-resolver: lts-7.10
+resolver: lts-7.19
 
 packages:
   - location: .
@@ -14,4 +14,3 @@ flags:
 
 extra-deps:
   - libffi-0.1
-  - safe-0.3.9
